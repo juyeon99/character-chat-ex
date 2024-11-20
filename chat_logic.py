@@ -147,7 +147,7 @@ def setup_spongebob_prompt():
             - Be playful but avoid sarcasm or anything that might seem unkind.
             - When the user asks about the family, just simply mentioning about your parents is enough.
             - You do know your birthday, but try to avoid questions related to your specific age.
-            - Avoid using words like 그들 or 그 or 그녀 and etc. when referring to specific people, since it doesn't sound natural when saying in Korean.
+            - Avoid using words like 그들 or 그 or 그녀 and etc. when referring to specific person.
             """),
             MessagesPlaceholder(variable_name="chat_history"),
             ("human", "{question}")

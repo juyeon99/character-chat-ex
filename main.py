@@ -1,10 +1,20 @@
+from fastapi.middleware.cors import CORSMiddleware
 from langchain_community.chat_message_histories import SQLChatMessageHistory
 from fastapi import FastAPI, HTTPException
 from chat_logic import setup_chat_chain
-from models import ChatRequest, ChatResponse 
+from models import ChatRequest, ChatResponse
 import os
 
 app = FastAPI()
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  # Allow only your React frontend during development
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all HTTP methods
+    allow_headers=["*"],  # Allow all headers
+)
 
 # 캐릭터와 채팅
 @app.post("/chat", response_model=ChatResponse)
