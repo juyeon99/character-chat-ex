@@ -24,18 +24,25 @@ app.add_middleware(
 @app.post("/chat", response_model=ChatResponse)
 async def chat(request: ChatRequest):
     try:
+        # import time
+        # start_time = time.time()
+
         # chain을 캐릭터에 따라 set
         chat_chain = setup_chat_chain(request.character_id)
 
+        # print("chat chain time", time.time() - start_time)
+        
         config = {
             "configurable": {
                 "user_id": request.user_id,
                 "conversation_id": request.conversation_id
             }
         }
-
+ 
         response = chat_chain.invoke({"question": request.question}, config)
-        return ChatResponse(answer=response)
+        
+        answer = ChatResponse(answer=response)
+        return answer
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
